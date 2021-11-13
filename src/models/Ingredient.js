@@ -4,6 +4,7 @@ const IngredientSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, unique: true },
     recipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],
+    picture: Object,
   },
   { timestamps: true }
 );

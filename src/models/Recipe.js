@@ -14,6 +14,7 @@ const RecipeSchema = new mongoose.Schema(
         ingredient: { type: mongoose.Schema.Types.ObjectId, ref: "Ingredient" },
       },
     ],
+    picture: Object,
   },
   { timestamps: true }
 );
