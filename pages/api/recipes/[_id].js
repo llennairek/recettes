@@ -1,5 +1,5 @@
 import dbConnect from "../../../src/lib/dbConnect";
-import Recipe from "../../../src/models/Recipe";
+import Recipe from "../../../src/api/models/Recipe";
 
 export default async function handler(req, res) {
   const { method } = req;

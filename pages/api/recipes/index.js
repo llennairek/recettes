@@ -1,7 +1,9 @@
 import dbConnect from "../../../src/lib/dbConnect";
-import Recipe from "../../../src/models/Recipe";
+import Recipe from "../../../src/api/models/Recipe";
 
-export default async function handler(req, res) {
+import isAuthenticated from "../../../src/api/middlewares/isAuthenticated";
+
+export default isAuthenticated(async function handler(req, res) {
   const { method } = req;
 
   await dbConnect();
@@ -9,7 +11,8 @@ export default async function handler(req, res) {
   switch (method) {
     case "GET":
       try {
-        const recipes = await Recipe.find();
+        console.log(req.user);
+        const recipes = await Recipe.find({ owner: req.user });
         res.status(200).json({ data: recipes });
       } catch (error) {
         res.status(400).json(error);
@@ -17,7 +20,22 @@ export default async function handler(req, res) {
       break;
     case "POST":
       try {
-        const recipe = await Recipe.create(req.body);
+        const recipe = new Recipe({
+          title: req.body.title,
+          steps: req.body.steps,
+          howMany: req.body.howMany,
+          season: req.body.season,
+          owner: req.user._id,
+          ingredients: req.body.ingredients,
+          picture: req.body.picture,
+        });
+
+        const user = req.user;
+        user.recipesOwner.push(recipe._id);
+
+        await recipe.save();
+        await user.save();
+
         res.status(201).json({ data: recipe });
       } catch (error) {
         console.log(error.message);
@@ -28,4 +46,4 @@ export default async function handler(req, res) {
       res.status(405).json({ message: "Method not supported" });
       break;
   }
-}
+});

@@ -4,8 +4,10 @@ const UserSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
+    hash: String,
     picture: Object,
-    recipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],
+    recipesOwner: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],
+    recipesUser: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],
   },
   { timestamps: true }
 );
