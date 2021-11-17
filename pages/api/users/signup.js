@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import cookie from "cookie";
 
 import dbConnect from "../../../src/lib/dbConnect";
 import User from "../../../src/api/models/User";
@@ -27,11 +28,25 @@ export default async function handler(req, res) {
     await user.save();
 
     const claims = { sub: user._id };
-    const accessToken = jwt.sign(claims, process.env.ACCESS_TOKEN_SECRET);
+    const accessToken = jwt.sign(claims, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: "600s",
+    });
+
+    res.setHeader(
+      "Set-Cookie",
+      cookie.serialize("auth", accessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== "development",
+        sameSite: "lax",
+        maxAge: 600,
+        path: "/",
+      })
+    );
 
     res.status(201).json({
-      accessToken,
-      data: { name: user.name, email: user.email, recipes: user.recipes },
+      name: user.name,
+      email: user.email,
+      recipes: user.recipesOwner,
     });
   } catch (error) {
     console.log(error.message);

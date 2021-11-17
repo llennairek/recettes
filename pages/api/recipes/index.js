@@ -4,6 +4,7 @@ import Recipe from "../../../src/api/models/Recipe";
 import isAuthenticated from "../../../src/api/middlewares/isAuthenticated";
 
 export default isAuthenticated(async function handler(req, res) {
+  // if (!req.user) return;
   const { method } = req;
 
   await dbConnect();
@@ -11,9 +12,8 @@ export default isAuthenticated(async function handler(req, res) {
   switch (method) {
     case "GET":
       try {
-        console.log(req.user);
-        const recipes = await Recipe.find({ owner: req.user });
-        res.status(200).json({ data: recipes });
+        const recipes = await Recipe.find({ owner: req.user.id });
+        res.status(200).json(recipes);
       } catch (error) {
         res.status(400).json(error);
       }
