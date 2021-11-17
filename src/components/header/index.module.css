@@ -1,0 +1,9 @@
+.container {
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+.link {
+  padding: 1rem 1rem;
+  font-size: 1rem;
+}
