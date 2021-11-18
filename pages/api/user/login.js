@@ -16,10 +16,12 @@ export default async function handler(req, res) {
     if (!req.body.email || !req.body.password)
       return res.status(400).json({ message: "Missing fields" });
 
-    const user = await User.findOne({ email: req.body.email }).populate({
-      path: "recipesOwner",
-      model: Recipe,
-    });
+    const user = await User.findOne({ email: req.body.email })
+      .select("+hash")
+      .populate({
+        path: "recipesOwner",
+        model: Recipe,
+      });
     if (!user) return res.status(400).json("Wrong email or password");
 
     const isPasswordVerified = await bcrypt.compare(

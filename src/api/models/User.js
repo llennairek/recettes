@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    hash: String,
+    hash: { type: String, select: false },
     picture: Object,
     recipesOwner: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],
     recipesUser: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],

@@ -1,17 +1,27 @@
 import React from "react";
 import useSWR from "swr";
+import Link from "next/link";
+
+import useUser from "../../lib/front/hooks/useUser";
 
 import styles from "./index.module.css";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const Home = () => {
-  const { data, error } = useSWR("/api/recipes", fetcher);
+  const { user, userError } = useUser();
+  const { data, error } = useSWR(user ? "/api/recipes" : null, fetcher);
   const handleAddRecipe = async () => {};
-  console.log({ data });
-  // console.log({ error });
 
-  if (error) return <div>Echec du chargement, vous devez être connecté</div>;
+  if (error || userError)
+    return (
+      <div>
+        <p>Bah alors t'es qui??!</p>
+        <Link href="/login">
+          <a>Se connecter</a>
+        </Link>
+      </div>
+    );
   if (!data) return <div>Chargement en cours....</div>;
   return (
     <main className={styles.main}>
@@ -20,7 +30,7 @@ const Home = () => {
       <h2>Liste de recettes</h2>
       <ul>
         {data?.map((recipe) => (
-          <li key={recipe._id}>{recipe.title} </li>
+          <li key={recipe._id}>{recipe.title}</li>
         ))}
       </ul>
     </main>

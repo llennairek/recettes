@@ -1,10 +1,11 @@
 import dbConnect from "../../../src/lib/dbConnect";
 import User from "../../../src/api/models/User";
 
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import isAuthenticated from "../../../src/api/middlewares/isAuthenticated";
 
-export default async function handler(req, res) {
+export default isAuthenticated(handler);
+
+async function handler(req, res) {
   const { method } = req;
 
   if (method !== "GET")
@@ -12,8 +13,9 @@ export default async function handler(req, res) {
 
   try {
     await dbConnect();
-    const users = await User.find();
-    res.status(200).json({ data: users });
+    const user = await User.findById(req.user._id);
+    if (!user) res.status(400).json({ message: "Bad request" });
+    res.status(200).json(user);
   } catch (error) {
     res.status(400).json(error);
   }
