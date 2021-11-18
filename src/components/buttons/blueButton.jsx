@@ -1,8 +1,16 @@
 import React from "react";
 
-import styles from "./blueButton.module.css";
+import styles from "./BlueButton.module.css";
 
-const BlueButton = ({ text, disabled, className, style, onClick, type }) => {
+const BlueButton = ({
+  text,
+  disabled,
+  className,
+  style,
+  onClick,
+  type,
+  children,
+}) => {
   return (
     <button
       type={type}
@@ -11,7 +19,7 @@ const BlueButton = ({ text, disabled, className, style, onClick, type }) => {
       style={style}
       onClick={onClick}
     >
-      {text}
+      {children}
     </button>
   );
 };

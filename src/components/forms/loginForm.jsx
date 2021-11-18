@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import styles from "./loginForm.module.css";
 
-import BlueButton from "../buttons/blueButton";
+import BlueButton from "../buttons/BlueButton";
 
 import loginSchema from "../../utils/validationSchemas/loginSchema";
 
@@ -30,7 +30,6 @@ const LoginForm = () => {
           }
           resetForm();
           setTriggerLeaveAnimation(true);
-          console.log(router);
           router.pathname === "/" ? router.reload() : router.push("/");
         }}
       >
@@ -60,7 +59,9 @@ const LoginForm = () => {
                 errors.email ||
                 errors.password
               }
-            />
+            >
+              Se connecter
+            </BlueButton>
           </Form>
         )}
       </Formik>
