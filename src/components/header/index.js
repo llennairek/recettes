@@ -28,7 +28,11 @@ const Header = () => {
             <a className={styles.link}>Login</a>
           </Link>
         )}
-        {user && <a onClick={handleLogout}>Logout</a>}
+        {user && (
+          <a onClick={handleLogout} className={styles.link}>
+            Logout
+          </a>
+        )}
       </nav>
     </header>
   );

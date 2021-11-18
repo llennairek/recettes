@@ -1,5 +1,6 @@
 import dbConnect from "../../../src/lib/dbConnect";
 import Recipe from "../../../src/api/models/Recipe";
+import User from "../../../src/api/models/User";
 
 import isAuthenticated from "../../../src/api/middlewares/isAuthenticated";
 
@@ -23,7 +24,7 @@ async function handler(req, res) {
       break;
     case "POST":
       try {
-        const recipe = new Recipe({
+        const recipe = await new Recipe({
           title: req.body.title,
           steps: req.body.steps,
           howMany: req.body.howMany,
@@ -33,7 +34,7 @@ async function handler(req, res) {
           picture: req.body.picture,
         });
 
-        const user = req.user;
+        const user = await User.findById(req.user._id);
         user.recipesOwner.push(recipe._id);
 
         await recipe.save();

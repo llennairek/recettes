@@ -2,7 +2,6 @@ import useSWR from "swr";
 
 const fetcher = (url) =>
   fetch(url).then(async (res) => {
-    console.log({ res });
     if (!res.ok) {
       const error = new Error("An error occured");
       error.status = res.status;
