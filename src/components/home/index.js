@@ -3,6 +3,8 @@ import useSWR from "swr";
 import Link from "next/link";
 
 import useUser from "../../lib/front/hooks/useUser";
+import LoginForm from "../forms/loginForm";
+import BlueButton from "../buttons/blueButton";
 
 import styles from "./index.module.css";
 
@@ -17,16 +19,14 @@ const Home = () => {
     return (
       <div>
         <p>Bah alors t'es qui??!</p>
-        <Link href="/login">
-          <a>Se connecter</a>
-        </Link>
+        <LoginForm />
       </div>
     );
   if (!data) return <div>Chargement en cours....</div>;
   return (
     <main className={styles.main}>
-      <h1>Bienvenue sur l'appli de recettes!</h1>
-      <button onClick={handleAddRecipe}>Ajouter une recette</button>
+      <h1>Salut {user.name}</h1>
+      <BlueButton text="Ajouter une recette" onClick={handleAddRecipe} />
       <h2>Liste de recettes</h2>
       <ul>
         {data?.map((recipe) => (

@@ -1,3 +1,40 @@
+.container {
+  font-size: 10px;
+  animation: open 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s forwards;
+  transform: translateX(-100%);
+  opacity: 0;
+}
+@keyframes open {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+.leave {
+  animation: close 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes close {
+  from {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
 .form {
   display: flex;
   flex-direction: column;
@@ -22,10 +59,11 @@
 }
 
 .submit:disabled {
-  filter: grayscale(50%);
+  filter: grayscale(70%);
   cursor: not-allowed;
 }
 .error {
-  padding: 0.5rem;
+  font-size: 12px;
+  /* padding: 0.5rem; */
   color: red;
 }
