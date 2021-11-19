@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
     const claims = { sub: user._id };
     const accessToken = jwt.sign(claims, process.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: "600s",
+      expiresIn: "7d",
     });
 
     res.setHeader(
@@ -38,7 +38,7 @@ export default async function handler(req, res) {
         httpOnly: true,
         secure: process.env.NODE_ENV !== "development",
         sameSite: "lax",
-        maxAge: 600,
+        maxAge: 604800,
         path: "/",
       })
     );

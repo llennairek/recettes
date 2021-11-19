@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import styles from "./index.module.css";
+import styles from "./Header.module.css";
 import { useRouter } from "next/router";
 import useUser from "../../lib/front/hooks/useUser";
 
@@ -17,17 +17,17 @@ const Header = () => {
   };
   return (
     <header className={styles.container}>
-      <nav>
+      <nav className={styles.nav}>
         <Link href="/">
-          <a className={styles.link}>Home</a>
+          <a className={styles.link + " slide-from-top"}>Home</a>
         </Link>
         {!user && (
           <Link href="/login">
-            <a className={styles.link}>Login</a>
+            <a className={styles.link + " slide-from-top"}>Login</a>
           </Link>
         )}
         {user && (
-          <a onClick={handleLogout} className={styles.link}>
+          <a onClick={handleLogout} className={styles.link + " slide-from-top"}>
             Logout
           </a>
         )}

@@ -5,7 +5,10 @@
   --text-primary: #242423;
   --background: #fdfffc;
 }
-
+html {
+  width: 100vw;
+  overflow-x: hidden;
+}
 html,
 body {
   padding: 0;

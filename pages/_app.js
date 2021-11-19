@@ -1,15 +1,13 @@
-import Header from "../src/components/header";
-import Footer from "../src/components/footer/Footer";
+import Layout from "../src/components/layout/Layout";
 
 import "../styles/globals.css";
+import "../styles/animations.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
-      <Header />
+    <Layout>
       <Component {...pageProps} />
-      <Footer />
-    </>
+    </Layout>
   );
 }
 

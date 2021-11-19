@@ -42,14 +42,18 @@ const LoginForm = () => {
           {({ isSubmitting, isValidating, errors, values }) => (
             <Form className={styles.form}>
               <div className={styles.error}>{errorMessage}</div>
-              <label htmlFor="email">Email</label>
+              <label className={styles.label} htmlFor="email">
+                Email
+              </label>
               <ErrorMessage
                 name="email"
                 render={(msg) => <div className={styles.error}>{msg}</div>}
               />
               <Field type="email" name="email" className={styles.input} />
 
-              <label htmlFor="password">Mot de passe</label>
+              <label className={styles.label} htmlFor="password">
+                Mot de passe
+              </label>
               <ErrorMessage
                 name="password"
                 render={(msg) => <div className={styles.error}> {msg}</div>}

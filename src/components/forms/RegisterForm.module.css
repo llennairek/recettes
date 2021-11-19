@@ -1,8 +1,5 @@
 .container {
   font-size: 1rem;
-  animation: open 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s forwards;
-  transform: translateX(-100%);
-  opacity: 0;
 }
 @keyframes open {
   from {
@@ -41,6 +38,14 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  animation: open 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s forwards;
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.label {
+  color: var(--secondary);
+  font-weight: 700;
 }
 
 .input {

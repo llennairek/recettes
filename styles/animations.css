@@ -1,0 +1,70 @@
+.slide-from-top {
+  animation: slideFromTop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.slide-from-bottom {
+  animation: slideFromBottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    forwards;
+}
+.slide-from-left {
+  animation: slideFromLeft 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.slide-from-right {
+  animation: slideFromRight 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    forwards;
+}
+
+@keyframes slideFromTop {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromBottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}

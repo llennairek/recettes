@@ -4,6 +4,7 @@ const RecipeSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     steps: [{ step: Number, content: String }],
+    vegetarian: { type: Boolean, required: true },
     howMany: Number,
     season: String,
     owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
