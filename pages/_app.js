@@ -1,4 +1,6 @@
 import Header from "../src/components/header";
+import Footer from "../src/components/footer/Footer";
+
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
@@ -6,6 +8,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Header />
       <Component {...pageProps} />
+      <Footer />
     </>
   );
 }

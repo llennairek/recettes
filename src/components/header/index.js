@@ -1,10 +1,8 @@
 import React from "react";
 import Link from "next/link";
 
-import Cookies from "js-cookie";
-
 import styles from "./index.module.css";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import useUser from "../../lib/front/hooks/useUser";
 
 const Header = () => {

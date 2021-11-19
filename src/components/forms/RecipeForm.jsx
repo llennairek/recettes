@@ -54,35 +54,39 @@ const RecipeForm = ({ mutate }) => {
             <Form className={styles.form}>
               <div className={styles.error}>{errorMessage}</div>
               <label htmlFor="title">Titre</label>
-              <Field type="text" name="title" className={styles.input} />
               <ErrorMessage
                 name="title"
                 render={(msg) => <div className={styles.error}>{msg}</div>}
               />
+              <Field type="text" name="title" className={styles.input} />
+
               <label htmlFor="howMany">Pour combien de personnes?</label>
-              <Field type="text" name="howMany" className={styles.input} />
               <ErrorMessage
                 name="howMany"
                 render={(msg) => <div className={styles.error}> {msg}</div>}
               />
+              <Field type="text" name="howMany" className={styles.input} />
+
               <label htmlFor="season">Saison</label>
-              <Field type="text" name="season" className={styles.input} />
               <ErrorMessage
                 name="season"
                 render={(msg) => <div className={styles.error}> {msg}</div>}
               />
+              <Field type="text" name="season" className={styles.input} />
 
               <label htmlFor="ingredients">Ingrédients</label>
-              <Field type="text" name="ingredients" className={styles.input} />
               <ErrorMessage
                 name="ingredients"
                 render={(msg) => <div className={styles.error}> {msg}</div>}
               />
+              <Field type="text" name="ingredients" className={styles.input} />
 
               <BlueButton
                 type="submit"
                 text="Se connecter"
-                disabled={isSubmitting || isValidating || errors.title}
+                disabled={
+                  isSubmitting || isValidating || errors.title || !values.title
+                }
               >
                 Ajouter
               </BlueButton>

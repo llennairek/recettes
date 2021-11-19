@@ -17,10 +17,12 @@ const Home = () => {
 
   if (error || userError)
     return (
-      <div>
-        <p>Bah alors t'es qui??!</p>
+      <main className={styles.main}>
+        <p className={styles.who}>
+          Salut...euh t'es <span>qui</span> ??!
+        </p>
         <LoginForm />
-      </div>
+      </main>
     );
 
   if (!data) return <Spinner />;

@@ -4,7 +4,7 @@
   opacity: 1;
   overflow: hidden;
   transition: max-height 1s ease-in-out;
-  border-bottom: 1px solid #669aca;
+  border-bottom: 1px solid var(--primary);
   padding: 0.5rem 1rem;
 }
 
@@ -18,14 +18,14 @@
 
 .input {
   padding: 0.5rem;
-  border: 2px solid #669aca;
+  border: 2px solid var(--primary);
   border-radius: 5px;
 }
 
 .submit {
-  border: 2px solid #669aca;
+  border: 2px solid var(--primary);
   border-radius: 5px;
-  background-color: #669aca;
+  background-color: var(--primary);
   padding: 0.5rem;
   color: #fff;
   cursor: pointer;

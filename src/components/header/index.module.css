@@ -2,7 +2,7 @@
   height: 70px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #669aca;
+  border-bottom: 1px solid var(--primary);
 }
 .link {
   position: relative;
@@ -10,12 +10,13 @@
   font-size: 1rem;
   transition: color 0.6s ease;
   overflow: hidden;
+  z-index: 0;
 }
 
 .link::before {
   content: "";
   position: absolute;
-  background-color: #669aca;
+  background-color: var(--primary);
   top: 0;
   left: 0;
   width: 100%;
@@ -28,7 +29,7 @@
 }
 
 .link:hover {
-  color: white;
+  color: var(--background);
 }
 
 .link:hover::before {
