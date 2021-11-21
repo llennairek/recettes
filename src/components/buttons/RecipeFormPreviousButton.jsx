@@ -7,10 +7,6 @@ const RecipeFormPreviousButton = ({
   scrollPosition,
   setScrollPosition,
 }) => {
-  const translate = formRef.current?.style.transform;
-  console.log(formRef);
-  console.log(translate);
-
   useEffect(() => {
     formRef.current.style.transform = `translateX(${scrollPosition}%)`;
   }, [scrollPosition]);

@@ -41,4 +41,5 @@
 .recipesContainer {
   opacity: 0;
   animation-delay: 1s;
+  width: 100%;
 }

@@ -51,6 +51,22 @@
   text-align: center;
   font-size: 16px;
   color: red;
+  animation: shake 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes shake {
+  from {
+    transform: translateX(10px);
+  }
+  25% {
+  }
+  50% {
+  }
+  75% {
+  }
+  to {
+    transform: translateX(00px);
+  }
 }
 
 .recipePreview {

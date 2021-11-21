@@ -2,12 +2,17 @@
   height: 70px;
   display: flex;
   align-items: center;
+  gap: 2rem;
   border-bottom: 1px solid var(--primary);
+  padding: 0 1rem;
 }
 
 .nav {
+  width: 100%;
   padding: 0 0.5rem;
   display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
 .link {
@@ -23,11 +28,20 @@
   opacity: 0;
 }
 
-.link:nth-child(1) {
+.logo {
   animation-delay: 0.5s;
 }
-.link:nth-child(2) {
+
+.link:nth-child(1) {
   animation-delay: 1s;
+}
+.link:nth-child(2) {
+  animation-delay: 1.5s;
+}
+.link:nth-child(3) {
+  /* margin-left: auto; */
+  animation-delay: 2s;
+  justify-self: flex-end;
 }
 
 .link::before {
@@ -46,10 +60,14 @@
 }
 
 .link:hover {
-  color: var(--background);
+  color: var(--header-link-hover);
 }
 
 .link:hover::before {
   transform: scale(1);
   border-radius: 5px;
+}
+
+.themeButton {
+  margin-left: auto;
 }

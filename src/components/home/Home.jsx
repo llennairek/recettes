@@ -6,6 +6,7 @@ import LoginForm from "../forms/LoginForm";
 import RecipeForm from "../forms/RecipeForm";
 import BlueButton from "../buttons/BlueButton";
 import Spinner from "../spinner/Spinner";
+import RecipesList from "../recipes/RecipesList";
 
 import styles from "./Home.module.css";
 
@@ -54,12 +55,7 @@ const Home = () => {
         <RecipeForm mutate={mutate} />
       </div>
       <div className={styles.recipesContainer + " slide-from-right"}>
-        <p>Liste de recettes</p>
-        <ul>
-          {data?.map((recipe) => (
-            <li key={recipe._id}>{recipe.title}</li>
-          ))}
-        </ul>
+        <RecipesList recipeList={data} />
       </div>
     </div>
   );
