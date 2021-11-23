@@ -14,7 +14,7 @@ const RecipeFormNextButton = ({
 }) => {
   useEffect(() => {
     formRef.current.style.transform = `translateX(${scrollPosition}%)`;
-  }, [scrollPosition]);
+  }, [formRef, scrollPosition]);
 
   return (
     <BlueButton

@@ -76,15 +76,15 @@ const LoginForm = ({ setShowRegisterForm }) => {
                 errors.password
               }
             >
-              S'inscrire
+              S&apos;inscrire
             </BlueButton>
 
             <div className={styles.registerText}>
               <div>
-                T'es perdu ? tu voulais juste <span> te connecter ?</span>
+                T&apos;es perdu ? tu voulais juste <span> te connecter ?</span>
               </div>
               <div>
-                Allez je suis sympa, je t'aide , c'est juste là !{" "}
+                Allez je suis sympa, je t&apos;aide , c&apos;est juste là !{" "}
                 <span
                   className={styles.registerLink}
                   onClick={() => {

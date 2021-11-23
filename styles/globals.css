@@ -49,3 +49,10 @@ a {
 .color-white {
   color: #ffffff;
 }
+
+.color-red {
+  color: var(--secondary);
+}
+.color-blue {
+  color: var(--primary);
+}

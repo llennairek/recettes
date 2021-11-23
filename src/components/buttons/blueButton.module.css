@@ -1,6 +1,6 @@
 .button {
   position: relative;
-  min-width: 150px;
+  /* min-width: 100px; */
   border: none;
   border-radius: 5px;
   background-color: var(--primary);
@@ -11,6 +11,13 @@
   font-size: 1rem;
   font-weight: 700;
   z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
 }
 
 .button::before {

@@ -11,7 +11,7 @@ import RegisterForm from "./RegisterForm";
 
 import LoginSchema from "../../utils/validationSchemas/loginSchema";
 
-const LoginForm = () => {
+const LoginForm = ({ style = {} }) => {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [triggerLeaveAnimation, setTriggerLeaveAnimation] = useState(false);
@@ -20,6 +20,7 @@ const LoginForm = () => {
   return (
     <div
       className={`${styles.container} ${triggerLeaveAnimation && styles.leave}`}
+      style={style}
     >
       {showRegisterForm ? (
         <RegisterForm setShowRegisterForm={setShowRegisterForm} />
@@ -77,7 +78,8 @@ const LoginForm = () => {
 
               <div className={styles.registerText}>
                 <div>
-                  Tu n'as pas encore de compte ? <span>Sérieux ???!!??</span>
+                  Tu n&apos;as pas encore de compte ?{" "}
+                  <span>Sérieux ???!!??</span>
                 </div>
                 <div>
                   Viens là ! Dépêche toi!{" "}
