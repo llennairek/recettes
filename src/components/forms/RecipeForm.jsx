@@ -10,10 +10,8 @@ import RecipeFormPreviousButton from "../buttons/RecipeFormPreviousButton";
 import SelectField from "./fields/SelectField";
 
 import RecipeSchema from "../../utils/validationSchemas/recipeSchema";
-import { getIngredients } from "../../lib/front/get";
-import IngredientForm from "./IngredientForm";
 
-const RecipeForm = ({ mutate, options = [] }) => {
+const RecipeForm = ({ mutate, options = [], ingredients }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [showRecipeForm, setShowRecipeForm] = useState(false);
   const [showIngredientForm, setShowIngredientForm] = useState(false);
@@ -37,21 +35,34 @@ const RecipeForm = ({ mutate, options = [] }) => {
           <span>{showRecipeForm ? "X" : "Ajouter une recette"}</span>
         </BlueButton>
       </div>
-      <div className={styles.container}>
+      <div
+        className={styles.container}
+        style={{ maxHeight: showRecipeForm ? "750px" : "0px" }}
+      >
         <div className={styles.error}>{errorMessage}</div>
         <Formik
           initialValues={{
             title: "",
-            steps: {},
-            howMany: "",
-            season: "",
+            // steps: null,
+            comment: "",
+            // season: "",
             ingredients: [],
+            vegetarian: "",
           }}
           validationSchema={RecipeSchema}
           onSubmit={async (values, { resetForm }) => {
             setErrorMessage("");
+            const valuesToSend = { ...values };
+
+            const ingredientsToSend = values.ingredients.map(
+              (ingredient) => ingredient._id
+            );
+            valuesToSend.vegetarian =
+              values.vegetarian === "true" ? true : false;
+            valuesToSend.ingredients = ingredientsToSend;
+
             axios
-              .post("http://localhost:3000/api/recipes", values)
+              .post(`/api/recipes`, valuesToSend)
               .then((res) => {
                 resetForm();
                 setShowRecipeForm(false);
@@ -63,7 +74,15 @@ const RecipeForm = ({ mutate, options = [] }) => {
               );
           }}
         >
-          {({ isSubmitting, isValidating, errors, values, validateField }) => (
+          {({
+            isSubmitting,
+            isValidating,
+            errors,
+            values,
+            validateField,
+            setFieldValue,
+            field,
+          }) => (
             <>
               <Form
                 className={styles.form}
@@ -98,38 +117,7 @@ const RecipeForm = ({ mutate, options = [] }) => {
                   </div>
                 </div>
 
-                <div className={styles.fieldWrapper}>
-                  <label className={styles.label} htmlFor="howMany">
-                    Pour combien de personnes?
-                  </label>
-                  <ErrorMessage
-                    name="howMany"
-                    render={(msg) => <div className={styles.error}> {msg}</div>}
-                  />
-                  <Field
-                    type="number"
-                    name="howMany"
-                    className={styles.input}
-                  />
-                  <div className={styles.buttonsWrapper}>
-                    <RecipeFormPreviousButton
-                      scrollPosition={scrollPosition}
-                      setScrollPosition={setScrollPosition}
-                      formRef={formRef}
-                    />
-                    <RecipeFormNextButton
-                      formRef={formRef}
-                      scrollPosition={scrollPosition}
-                      setScrollPosition={setScrollPosition}
-                      isSubmitting={isSubmitting}
-                      isValidating={isValidating}
-                      error={errors.howMany}
-                      value={true}
-                    />
-                  </div>
-                </div>
-
-                <div className={styles.fieldWrapper}>
+                {/* <div className={styles.fieldWrapper}>
                   <label className={styles.label} htmlFor="season">
                     Saison
                   </label>
@@ -154,7 +142,7 @@ const RecipeForm = ({ mutate, options = [] }) => {
                       value={true}
                     />
                   </div>
-                </div>
+                </div> */}
 
                 <div className={styles.fieldWrapper}>
                   <label className={styles.label} htmlFor="ingredients">
@@ -219,6 +207,80 @@ const RecipeForm = ({ mutate, options = [] }) => {
                 </div>
 
                 <div className={styles.fieldWrapper}>
+                  <label className={styles.label} htmlFor="vegetarian">
+                    Plat végétarien?
+                  </label>
+                  <ErrorMessage
+                    name="vegetarian"
+                    render={(msg) => <div className={styles.error}>{msg}</div>}
+                  />
+                  <div
+                    className={styles.radioWrapper}
+                    role="group"
+                    aria-labelledby="vegetarian-group"
+                  >
+                    <label>
+                      <Field type="radio" name="vegetarian" value="true" />
+                      Végétarien
+                    </label>
+                    <label>
+                      <Field type="radio" name="vegetarian" value="false" />
+                      Non végétarien
+                    </label>
+                  </div>
+                  <div className={styles.buttonsWrapper}>
+                    <RecipeFormPreviousButton
+                      scrollPosition={scrollPosition}
+                      setScrollPosition={setScrollPosition}
+                      formRef={formRef}
+                    />
+                    <RecipeFormNextButton
+                      formRef={formRef}
+                      scrollPosition={scrollPosition}
+                      setScrollPosition={setScrollPosition}
+                      isSubmitting={isSubmitting}
+                      isValidating={isValidating}
+                      error={errors.vegetarian}
+                      value={values.vegetarian}
+                    />
+                  </div>
+                </div>
+
+                <div className={styles.fieldWrapper}>
+                  <label className={styles.label} htmlFor="comment">
+                    Commentaires / Instructions de la recette
+                  </label>
+                  <ErrorMessage
+                    name="comment"
+                    render={(msg) => <div className={styles.error}> {msg}</div>}
+                  />
+                  <Field
+                    type="text"
+                    name="comment"
+                    className={styles.input}
+                    as="textarea"
+                    placeholder="Ajouter un commentaire ou des instructions de recette"
+                    rows="5"
+                  />
+                  <div className={styles.buttonsWrapper}>
+                    <RecipeFormPreviousButton
+                      scrollPosition={scrollPosition}
+                      setScrollPosition={setScrollPosition}
+                      formRef={formRef}
+                    />
+                    <RecipeFormNextButton
+                      formRef={formRef}
+                      scrollPosition={scrollPosition}
+                      setScrollPosition={setScrollPosition}
+                      isSubmitting={isSubmitting}
+                      isValidating={isValidating}
+                      error={errors.comment}
+                      value={true}
+                    />
+                  </div>
+                </div>
+
+                <div className={styles.fieldWrapper}>
                   <div className={styles.buttonsWrapper}>
                     <RecipeFormPreviousButton
                       scrollPosition={scrollPosition}
@@ -236,7 +298,8 @@ const RecipeForm = ({ mutate, options = [] }) => {
                         isSubmitting ||
                         isValidating ||
                         errors.title ||
-                        !values.title
+                        !values.title ||
+                        errors.vegetarian
                       }
                     >
                       Ajouter
@@ -244,6 +307,7 @@ const RecipeForm = ({ mutate, options = [] }) => {
                   </div>
                 </div>
               </Form>
+              {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
 
               <div
                 className={styles.recipePreview}
@@ -257,23 +321,36 @@ const RecipeForm = ({ mutate, options = [] }) => {
                 </div>
                 <div>
                   <span className="color-blue">
-                    Nbre de personnes :{" "}
-                    <span className="color-white">{values.howMany}</span>
+                    Commentaires :{" "}
+                    <span className="color-white">{values.comment}</span>
                   </span>
                   <span></span>
                 </div>
-                <div>
+                {/* <div>
                   <span className="color-blue">
                     Saison :{" "}
                     <span className="color-white">{values.season}</span>
                   </span>
                   <span></span>
-                </div>
+                </div> */}
                 <div>
                   <span className="color-blue">
                     Ingrédients :{" "}
                     <span className="color-white">
                       {values.ingredients.map((value) => value.value).join(" ")}
+                    </span>
+                  </span>
+                  <span></span>
+                </div>
+                <div>
+                  <span className="color-blue">
+                    Végétarien :{" "}
+                    <span className="color-white">
+                      {!values.vegetarian
+                        ? ""
+                        : values.vegetarian === "true"
+                        ? "Oui"
+                        : "Non"}
                     </span>
                   </span>
                   <span></span>

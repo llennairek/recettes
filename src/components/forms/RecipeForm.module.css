@@ -31,8 +31,8 @@
 }
 
 .label {
-  color: var(--secondary);
-  font-size: 1.5rem;
+  color: var(--text-primary);
+  font-size: 1rem;
   font-weight: 700;
   padding: 0.25rem 0 1rem 0;
   text-decoration: underline;
@@ -57,22 +57,36 @@
 .error {
   text-align: center;
   font-size: 16px;
+  font-weight: 700;
   color: red;
-  animation: shake 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: shake 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin-bottom: 0.2rem;
+}
+
+.form input[type="radio"] {
+  margin: 1rem 0.5rem;
+}
+
+.form textarea {
+  width: 95%;
+  resize: vertical;
 }
 
 @keyframes shake {
   from {
-    transform: translateX(10px);
+    transform: translateX(4px);
   }
   25% {
+    transform: translateX(-4px);
   }
   50% {
+    transform: translateY(-4px);
   }
   75% {
+    transform: translateY(4px);
   }
   to {
-    transform: translateX(00px);
+    transform: translate(0px);
   }
 }
 
@@ -81,6 +95,10 @@
   overflow: hidden;
   transition: all 0.5s 0.25s;
   padding: 0 1rem 0rem 1rem;
+}
+
+.recipePreview > div:last-child {
+  margin-bottom: 1rem;
 }
 
 @media screen and (min-width: 1024px) {

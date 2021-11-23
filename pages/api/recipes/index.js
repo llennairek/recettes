@@ -3,6 +3,7 @@ import Recipe from "../../../src/api/models/Recipe";
 import User from "../../../src/api/models/User";
 
 import isAuthenticated from "../../../src/api/middlewares/isAuthenticated";
+import mongoose from "mongoose";
 
 export default isAuthenticated(handler);
 
@@ -16,7 +17,9 @@ async function handler(req, res) {
   switch (method) {
     case "GET":
       try {
-        const recipes = await Recipe.find({ owner: req.user._id });
+        const recipes = await Recipe.find({ owner: req.user._id }).populate(
+          "ingredients"
+        );
         res.status(200).json(recipes);
       } catch (error) {
         res.status(400).json(error);
@@ -26,12 +29,13 @@ async function handler(req, res) {
       try {
         const recipe = await new Recipe({
           title: req.body.title,
-          steps: req.body.steps,
-          howMany: req.body.howMany,
-          season: req.body.season,
+          // steps: req.body.steps ? req.body.steps : null,
+          comment: req.body.comment,
+          // season: req.body.season,
           owner: req.user._id,
           ingredients: req.body.ingredients,
           picture: req.body.picture,
+          vegetarian: Boolean(req.body.vegetarian),
         });
 
         const user = await User.findById(req.user._id);

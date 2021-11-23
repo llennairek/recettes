@@ -7,9 +7,14 @@ const RecipeCard = ({ recipe }) => {
     <article className={styles.recipeContainer}>
       <div className={styles.recipeWrapper}>
         <h2>{recipe.title}</h2>
-        <div>Nbre de personnes: {recipe.howMany || 0}</div>
-        <div>Saison: {recipe.season || "Toutes"}</div>
-        <div>Ingredients: {recipe.ingredients || ""}</div>
+        <div>Végétarien : {recipe.vegetarian ? "Oui" : "Non"}</div>
+        {/* <div>Saison: {recipe.season || "Toutes"}</div> */}
+        <div>
+          Ingredients: {recipe.ingredients.map((ingredient) => ingredient.name)}
+        </div>
+        <div>
+          Commentaires:<pre>{recipe.comment || ""}</pre>
+        </div>
       </div>
     </article>
   );

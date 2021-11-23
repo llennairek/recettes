@@ -152,7 +152,7 @@ const IngredientForm = ({ mutate }) => {
                   <div
                     className={styles.radioWrapper}
                     role="group"
-                    aria-labelledby="my-radio-group"
+                    aria-labelledby="type-group"
                   >
                     <label>
                       <Field type="radio" name="type" value="fruit" />

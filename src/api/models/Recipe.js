@@ -3,19 +3,15 @@ import mongoose from "mongoose";
 const RecipeSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
-    steps: [{ step: Number, content: String }],
+    // steps: [{ step: Number, content: String }],
     vegetarian: { type: Boolean, required: true },
     howMany: Number,
-    season: String,
+    // season: String,
     owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     users: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    ingredients: [
-      {
-        quantity: Number,
-        ingredient: { type: mongoose.Schema.Types.ObjectId, ref: "Ingredient" },
-      },
-    ],
+    ingredients: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ingredient" }],
     picture: Object,
+    comment: String,
   },
   { timestamps: true }
 );

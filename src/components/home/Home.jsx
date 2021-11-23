@@ -17,19 +17,21 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 const Home = () => {
   const { user, userError } = useUser();
   const { data, mutate, error } = useSWR(user ? "/api/recipes" : null, fetcher);
-  const [options, setOptions] = useState([]);
+  const {
+    data: ingredients,
+    mutate: mutateIngredients,
+    error: ingredientsError,
+  } = useSWR(user ? "/api/ingredients" : null, fetcher);
+  const [options, setOptions] = useState(ingredientsError ? [] : ingredients);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const options = await getIngredients();
-      const optionsformated = options.map((option) => ({
-        value: option.name,
-        label: option.name,
-      }));
-      setOptions(optionsformated);
-    };
-    fetchData();
-  }, []);
+    const optionsformated = ingredients?.map((option) => ({
+      value: option.name,
+      label: option.name,
+      _id: option._id,
+    }));
+    setOptions(optionsformated);
+  }, [ingredients]);
 
   if (error || userError)
     return (
@@ -71,9 +73,13 @@ const Home = () => {
       </p>
       <div className={styles.main}>
         <div className={styles.recipeForm + " slide-from-left"}>
-          <RecipeForm mutate={mutate} options={options} />
+          <RecipeForm
+            mutate={mutate}
+            options={options}
+            ingredients={ingredients}
+          />
           {/* <hr style={{ borderColor: "var(--secondary)" }} /> */}
-          <IngredientForm mutate={mutate} />
+          <IngredientForm mutate={mutateIngredients} />
         </div>
         <div className={styles.recipesContainer + " slide-from-right"}>
           <RecipesList recipeList={data} />

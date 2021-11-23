@@ -4,8 +4,28 @@ import { useField } from "formik";
 import React from "react";
 import Select, { Option } from "react-select";
 
+const customStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    color: "var(--background)",
+    // borderBottom: "1px solid var(--background)",
+    padding: "0.5rem 1rem",
+    cursor: "pointer",
+  }),
+  control: (provided) => ({
+    ...provided,
+    width: "95%",
+    margin: "0 auto",
+  }),
+  // singleValue: (provided, state) => {
+  //   const opacity = state.isDisabled ? 0.5 : 1;
+  //   const transition = 'opacity 300ms';
+
+  //   return { ...provided, opacity, transition };
+  // }
+};
+
 const SelectField = (props) => {
-  console.log(props.options);
   const [field, state, { setValue, setTouched }] = useField(props.field?.name);
   const onChange = (value) => {
     setValue(value);
@@ -19,6 +39,9 @@ const SelectField = (props) => {
       value={state?.value}
       onChange={onChange}
       onBlur={setTouched}
+      menuPortalTarget={document.querySelector("main")}
+      styles={customStyles}
+      placeholder="Choisissez vos ingrédients"
     />
   );
 };
